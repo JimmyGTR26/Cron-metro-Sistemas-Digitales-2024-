@@ -1,0 +1,233 @@
+***************************************************************************************
+;SUBRUTINA: delay_1s    ; demora de 1 segundo (10,000,000 de ciclos de 100 ns)
+
+delay_1s			; [5] luego del llamado a JSR 
+		PSHH		; (2)
+		CLRH		; (1)
+
+		LDA #$FA	; (2)
+		LDX #$68	; (2)
+loopax01	DBNZX loopax01	
+		DBNZA loopax01	; 771*CTa + 3*CTx - 768
+		LDA #$FA	
+		LDX #$68	
+loopax02	DBNZX loopax02	
+		DBNZA loopax02	
+		LDA #$FA	
+		LDX #$68	
+loopax03	DBNZX loopax03	
+		DBNZA loopax03	
+		LDA #$FA	
+		LDX #$68	
+loopax04	DBNZX loopax04	
+		DBNZA loopax04	
+		LDA #$FA	
+		LDX #$68	
+loopax05	DBNZX loopax05	
+		DBNZA loopax05	
+		LDA #$FA	
+		LDX #$68	
+loopax06	DBNZX loopax06	
+		DBNZA loopax06	
+		LDA #$FA	
+		LDX #$68	
+loopax07	DBNZX loopax07	
+		DBNZA loopax07	
+		LDA #$FA	
+		LDX #$68	
+loopax08	DBNZX loopax08	
+		DBNZA loopax08	
+		LDA #$FA	
+		LDX #$68	
+loopax09	DBNZX loopax09	
+		DBNZA loopax09	
+		LDA #$FA	
+		LDX #$68	
+loopax10	DBNZX loopax10	
+		DBNZA loopax10	
+
+		LDA #$FA	
+		LDX #$68	
+loopax11	DBNZX loopax11	
+		DBNZA loopax11	
+		LDA #$FA	
+		LDX #$68	
+loopax12	DBNZX loopax12	
+		DBNZA loopax12	
+		LDA #$FA	
+		LDX #$68	
+loopax13	DBNZX loopax13	
+		DBNZA loopax13	
+		LDA #$FA	
+		LDX #$68	
+loopax14	DBNZX loopax14	
+		DBNZA loopax14	
+		LDA #$FA	
+		LDX #$68	
+loopax15	DBNZX loopax15	
+		DBNZA loopax15	
+		LDA #$FA	
+		LDX #$68	
+loopax16	DBNZX loopax16	
+		DBNZA loopax16	
+		LDA #$FA	
+		LDX #$68	
+loopax17	DBNZX loopax17	
+		DBNZA loopax17	
+		LDA #$FA	
+		LDX #$68	
+loopax18	DBNZX loopax18	
+		DBNZA loopax18	
+		LDA #$FA	
+		LDX #$68	
+loopax19	DBNZX loopax19	
+		DBNZA loopax19	
+		LDA #$FA	
+		LDX #$68	
+loopax20	DBNZX loopax20	
+		DBNZA loopax20	
+
+		LDA #$FA	
+		LDX #$68	
+loopax21	DBNZX loopax21	
+		DBNZA loopax21	
+		LDA #$FA	
+		LDX #$68	
+loopax22	DBNZX loopax22	
+		DBNZA loopax22	
+		LDA #$FA	
+		LDX #$68	
+loopax23	DBNZX loopax23	
+		DBNZA loopax23	
+		LDA #$FA	
+		LDX #$68	
+loopax24	DBNZX loopax24	
+		DBNZA loopax24	
+		LDA #$FA	
+		LDX #$68	
+loopax25	DBNZX loopax25	
+		DBNZA loopax25	
+		LDA #$FA	
+		LDX #$68	
+loopax26	DBNZX loopax26	
+		DBNZA loopax26	
+		LDA #$FA	
+		LDX #$68	
+loopax27	DBNZX loopax27	
+		DBNZA loopax27	
+		LDA #$FA	
+		LDX #$68	
+loopax28	DBNZX loopax28	
+		DBNZA loopax28	
+		LDA #$FA	
+		LDX #$68	
+loopax29	DBNZX loopax29	
+		DBNZA loopax29	
+		LDA #$FA	
+		LDX #$68	
+loopax30	DBNZX loopax30	
+		DBNZA loopax30	
+
+		LDA #$FA	
+		LDX #$68	
+loopax31	DBNZX loopax31	
+		DBNZA loopax31	
+		LDA #$FA	
+		LDX #$68	
+loopax32	DBNZX loopax32	
+		DBNZA loopax32	
+		LDA #$FA	
+		LDX #$68	
+loopax33	DBNZX loopax33	
+		DBNZA loopax33	
+		LDA #$FA	
+		LDX #$68	
+loopax34	DBNZX loopax34	
+		DBNZA loopax34	
+		LDA #$FA	
+		LDX #$68	
+loopax35	DBNZX loopax35	
+		DBNZA loopax35	
+		LDA #$FA	
+		LDX #$68	
+loopax36	DBNZX loopax36	
+		DBNZA loopax36	
+		LDA #$FA	
+		LDX #$68	
+loopax37	DBNZX loopax37	
+		DBNZA loopax37	
+		LDA #$FA	
+		LDX #$68	
+loopax38	DBNZX loopax38	
+		DBNZA loopax38	
+		LDA #$FA	
+		LDX #$68	
+loopax39	DBNZX loopax39	
+		DBNZA loopax39	
+		LDA #$FA	
+		LDX #$68	
+loopax40	DBNZX loopax40	
+		DBNZA loopax40	
+
+		LDA #$FA	
+		LDX #$68	
+loopax41	DBNZX loopax41	
+		DBNZA loopax41	
+		LDA #$FA	
+		LDX #$68	
+loopax42	DBNZX loopax42	
+		DBNZA loopax42	
+		LDA #$FA	
+		LDX #$68	
+loopax43	DBNZX loopax43	
+		DBNZA loopax43	
+		LDA #$FA	
+		LDX #$68	
+loopax44	DBNZX loopax44	
+		DBNZA loopax44	
+		LDA #$FA	
+		LDX #$68	
+loopax45	DBNZX loopax45	
+		DBNZA loopax45	
+		LDA #$FA	
+		LDX #$68	
+loopax46	DBNZX loopax46	
+		DBNZA loopax46	
+		LDA #$FA	
+		LDX #$68	
+loopax47	DBNZX loopax47	
+		DBNZA loopax47	
+		LDA #$FA	
+		LDX #$68	
+loopax48	DBNZX loopax48	
+		DBNZA loopax48	
+		LDA #$FA	
+		LDX #$68	
+loopax49	DBNZX loopax49	
+		DBNZA loopax49	
+		LDA #$FA	
+		LDX #$68	
+loopax50	DBNZX loopax50	
+		DBNZA loopax50	
+
+		LDA #$FA	
+		LDX #$68	
+loopax51	DBNZX loopax51	
+		DBNZA loopax51	
+		LDA #$FA	
+		LDX #$68	
+loopax52	DBNZX loopax52	
+		DBNZA loopax52	
+
+		LDA #$E8	; (2)
+		
+loopnop		DBNZA loopnop	; (3*Cloopnop)
+
+		PULH		; (2) recupero el H
+		RTS		; [4]
+***************************************************************************************
+;NloopAX = 52
+;CTa = 250
+;CTx = 104
+;CloopNOP = 232
+;b(Cnop) = 0

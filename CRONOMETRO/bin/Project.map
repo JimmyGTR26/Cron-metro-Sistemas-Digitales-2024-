@@ -1,0 +1,171 @@
+
+PROGRAM "C:\Users\usuario\Desktop\Cronometro_Gutierrez\CRONOMETRO\bin\Project.abs"
+
+*********************************************************************************************
+TARGET SECTION
+---------------------------------------------------------------------------------------------
+Processor   : Freescale HC08
+Memory Model: SMALL
+File Format : ELF\DWARF 2.0
+Linker      : SmartLinker V-5.0.37 Build 9279, Oct  7 2009
+
+*********************************************************************************************
+FILE SECTION
+---------------------------------------------------------------------------------------------
+main.asm.o                              Model: SMALL,         Lang: Assembler
+
+*********************************************************************************************
+STARTUP SECTION
+---------------------------------------------------------------------------------------------
+Entry point: 0xE000 (_Startup)
+
+*********************************************************************************************
+SECTION-ALLOCATION SECTION
+Section Name                    Size  Type     From       To       Segment
+---------------------------------------------------------------------------------------------
+.init                            344     R     0xE000     0xE157   ROM
+main.asm__ORG00001                 2     R     0xFFCC     0xFFCD   .absSeg0
+.stack                            64   R/W      0x100      0x13F   RAM
+.vectSeg1_vect                     2     R     0xFFFE     0xFFFF   .vectSeg1
+
+Summary of section sizes per section type:
+READ_ONLY (R):         15C (dec:      348)
+READ_WRITE (R/W):       40 (dec:       64)
+
+*********************************************************************************************
+VECTOR-ALLOCATION SECTION
+    Address     InitValue   InitFunction
+---------------------------------------------------------------------------------------------
+     0xFFFE        0xE000   _Startup
+
+*********************************************************************************************
+OBJECT-ALLOCATION SECTION
+     Name               Module                 Addr   hSize   dSize     Ref    Section   RLIB
+---------------------------------------------------------------------------------------------
+MODULE:                 -- main.asm.o --
+- PROCEDURES:
+     _Startup                                  E000      1D      29       0   .init       
+     main                                      E000       0       0       0   .init       
+     mainLoop                                  E01D       B      11       1   .init       
+     SI_ON                                     E028       9       9       0   .init       
+     STOP_ON                                   E031       9       9       0   .init       
+     RESET_ON                                  E03A       8       8       0   .init       
+     SIG_1                                     E042      18      24       1   .init       
+     R_1MS                                     E05A      1C      28       0   .init       
+     R_2MS                                     E076      1C      28       0   .init       
+     R_3MS                                     E092      1C      28       0   .init       
+     R_4MS                                     E0AE      1B      27       0   .init       
+     R_5MS                                     E0C9       7       7       0   .init       
+     SUB_7                                     E0D0       9       9       4   .init       
+     NO_0                                      E0D9       9       9       0   .init       
+     NO_1                                      E0E2       9       9       0   .init       
+     NO_2                                      E0EB       9       9       0   .init       
+     NO_3                                      E0F4       9       9       0   .init       
+     NO_4                                      E0FD       9       9       0   .init       
+     NO_5                                      E106       9       9       0   .init       
+     NO_6                                      E10F       9       9       0   .init       
+     NO_7                                      E118       9       9       0   .init       
+     NO_8                                      E121       9       9       0   .init       
+     NO_9                                      E12A       1       1       0   .init       
+     rtcISR                                    E12B       C      12       1   .init       
+     D_SEG                                     E137       C      12       0   .init       
+     U_MIN                                     E143       C      12       0   .init       
+     D_MIN                                     E14F       8       8       0   .init       
+     FIN                                       E157       1       1       0   .init       
+- VARIABLES:
+     VAR00001                                  FFCC       2       2       0   .text       
+- LABELS:
+     __SEG_END_SSTACK                           140       0       0       1               
+
+*********************************************************************************************
+MODULE STATISTIC
+  Name                                      Data   Code  Const
+---------------------------------------------------------------------------------------------
+  main.asm.o                                   0    344      2
+  other                                       64      2      0
+
+*********************************************************************************************
+SECTION USE IN OBJECT-ALLOCATION SECTION
+---------------------------------------------------------------------------------------------
+SECTION: ".text"
+  VAR00001 
+SECTION: ".init"
+  main _Startup mainLoop SI_ON STOP_ON RESET_ON SIG_1 R_1MS R_2MS R_3MS R_4MS 
+  R_5MS SUB_7 NO_0 NO_1 NO_2 NO_3 NO_4 NO_5 NO_6 NO_7 NO_8 NO_9 rtcISR D_SEG 
+  U_MIN D_MIN FIN 
+
+*********************************************************************************************
+OBJECT LIST SORTED BY ADDRESS
+     Name                                      Addr   hSize   dSize     Ref    Section   RLIB
+---------------------------------------------------------------------------------------------
+     main                                      E000       0       0       0   .init       
+     _Startup                                  E000      1D      29       0   .init       
+     mainLoop                                  E01D       B      11       1   .init       
+     SI_ON                                     E028       9       9       0   .init       
+     STOP_ON                                   E031       9       9       0   .init       
+     RESET_ON                                  E03A       8       8       0   .init       
+     SIG_1                                     E042      18      24       1   .init       
+     R_1MS                                     E05A      1C      28       0   .init       
+     R_2MS                                     E076      1C      28       0   .init       
+     R_3MS                                     E092      1C      28       0   .init       
+     R_4MS                                     E0AE      1B      27       0   .init       
+     R_5MS                                     E0C9       7       7       0   .init       
+     SUB_7                                     E0D0       9       9       4   .init       
+     NO_0                                      E0D9       9       9       0   .init       
+     NO_1                                      E0E2       9       9       0   .init       
+     NO_2                                      E0EB       9       9       0   .init       
+     NO_3                                      E0F4       9       9       0   .init       
+     NO_4                                      E0FD       9       9       0   .init       
+     NO_5                                      E106       9       9       0   .init       
+     NO_6                                      E10F       9       9       0   .init       
+     NO_7                                      E118       9       9       0   .init       
+     NO_8                                      E121       9       9       0   .init       
+     NO_9                                      E12A       1       1       0   .init       
+     rtcISR                                    E12B       C      12       1   .init       
+     D_SEG                                     E137       C      12       0   .init       
+     U_MIN                                     E143       C      12       0   .init       
+     D_MIN                                     E14F       8       8       0   .init       
+     FIN                                       E157       1       1       0   .init       
+     VAR00001                                  FFCC       2       2       0   .text       
+
+*********************************************************************************************
+UNUSED-OBJECTS SECTION
+---------------------------------------------------------------------------------------------
+
+*********************************************************************************************
+COPYDOWN SECTION
+---------------------------------------------------------------------------------------------
+
+*********************************************************************************************
+OBJECT-DEPENDENCIES SECTION
+---------------------------------------------------------------------------------------------
+_Startup                  USES __SEG_END_SSTACK 
+mainLoop                  USES SIG_1 
+SIG_1                     USES SUB_7 
+R_1MS                     USES SUB_7 
+R_2MS                     USES SUB_7 
+R_3MS                     USES SUB_7 
+R_5MS                     USES mainLoop 
+
+*********************************************************************************************
+DEPENDENCY TREE
+*********************************************************************************************
+ main and _Startup Group
+ | 
+ +- main                
+ |    
+ +- _Startup            
+      
+ _ORG00001           
+ | 
+ +- rtcISR              
+      
+*********************************************************************************************
+STATISTIC SECTION
+---------------------------------------------------------------------------------------------
+
+ExeFile:
+--------
+Number of blocks to be downloaded: 3
+Total size of all blocks to be downloaded: 348
+

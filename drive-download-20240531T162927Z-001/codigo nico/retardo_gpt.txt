@@ -1,0 +1,23 @@
+; Subrutina de retardo ajustable
+; Input: Accumulador A = número de ciclos de retardo
+; Este retardo es aproximado y depende de la frecuencia del reloj del microprocesador
+
+            ORG $C000      ; Dirección de inicio del código (puede ajustarse según sea necesario)
+START       LDS #$00FF     ; Inicializar el Stack Pointer
+            LDAA #$05      ; Cargar el número de ciclos de retardo deseados en el acumulador A
+            JSR DELAY      ; Llamar a la subrutina de retardo
+
+            ; Continuar con el resto del programa
+
+            SWI            ; Software Interrupt (detiene el programa para propósitos de depuración)
+
+; Subrutina de retardo
+DELAY       STAA TEMP      ; Guardar el valor en TEMP
+DELAY_LOOP  NOP            ; Operación NOP (No Operación), para ajustar el tiempo
+            DECA           ; Decrementar el acumulador A
+            BNE DELAY_LOOP ; Si A no es cero, repetir el bucle
+            RTS            ; Retornar de la subrutina
+
+TEMP        RMB 1          ; Reservar 1 byte de memoria para TEMP
+
+            END            ; Fin del programa

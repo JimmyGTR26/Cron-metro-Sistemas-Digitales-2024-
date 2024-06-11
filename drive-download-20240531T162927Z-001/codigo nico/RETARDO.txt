@@ -1,0 +1,40 @@
+; entre parentesis (cantidad de ciclos de reloj que insume la ejecucion de la instruccion)
+
+delay_10m       
+                                       ; [5] viene del llamado a jsr 
+									   
+		PSHH                   ; (2) el H al stack
+                CLRH         	       ; (1) limpio el H   
+                
+		LDAA #!26              ; (2)  se escrbe el A
+                LDX #!235              ; (2)  se escribe el X
+leep            DECA
+		BNE leep	       ; (3)
+                DEX
+		BNE leep               ; (3)
+				
+                PULH		       ; (2)recupero el H
+                RTS		       ; [4]
+******************************************************************************************************
+; tiempo de retardo (delay) = N_Ciclos_reloj(NC) que insume la subrutina x periodo del ciclo de reloj
+******************************************************************************************************
+
+;**** ecuacion para implementar un determinado numero de ciclos (NC) *****
+
+; El codigo de: delay_10m cumple con la siguiente ecuacion para el calculo de NC 
+; Desde el llamado a subrutina que son [5] ciclos de reloj,hasta el rts que son [4] ciclos de reloj
+; la ecuacion es:
+; N_Ciclos_reloj(NC)=[5]+ 2+1+2+2 + CT2*3 + 3 +(CT1-1)*([3*256]+3)] + 2 +[4]
+;A = #CT1
+;X = #CT2
+; Dado el tiempo que se quiere implementar y conociendo la frecuencia de reloj, despejando NC  >>
+; NC = tiempo (delay) / periodo reloj =  delay x fXtal 
+; Para delay = 0.010 segundos (10 miliseg) y frecuencia Xtal 2000000 (2MHz)
+; Resulta un NC = 20000
+; Adoptamos el valor de una constante y aproximamos el otro, por ejemplo: 
+; Si CT1 =!26 ; y  CT2 =!235
+; entonces:  NC = 12 + 235*3 + 3 + 25 * 771 + 6 
+; NC = 12 + 705 + 3 + 19275 + 6 = 20001
+; Se podria reducir el valor de CT2 y luego insertar tantos nop (1 ciclo)
+; despues del pulh para que NC de exacto 20000.
+             

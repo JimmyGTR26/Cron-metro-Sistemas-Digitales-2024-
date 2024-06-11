@@ -1,0 +1,425 @@
+;*******************************************************************
+;* This stationery serves as the framework for a user application. *
+;* For a more comprehensive program that demonstrates the more     *
+;* advanced functionality of this processor, please see the        *
+;* demonstration applications, located in the examples             *
+;* subdirectory of the "Freescale CodeWarrior for HC08" program    *
+;* directory.                                                      *
+;*******************************************************************
+
+; Include derivative-specific definitions
+            INCLUDE 'derivative.inc'
+
+; export symbols
+            XDEF _Startup, main
+            ; we export both '_Startup' and 'main' as symbols. Either can
+            ; be referenced in the linker .prm file or from C/C++ later on
+
+            XREF __SEG_END_SSTACK   ; symbol defined by the linker for the end of the stack
+
+
+; variable/data section
+MY_ZEROPAGE: SECTION  SHORT         ; Insert here your data definition
+
+; code section
+MyCode:     SECTION
+main:
+_Startup:
+            LDHX   #__SEG_END_SSTACK ; initialize the stack pointer
+            TXS
+            CLI                     ; enable interrupts
+            LDA #$FF
+            STA PTBDD
+            STA PTADD
+            LDA #$00
+            STA PTAD
+
+mainLoop:
+            ; Insert your code here
+;****************************************************************************************
+;Main viejo (cuenta sobre si mismo)
+
+
+MAIN	
+
+U_SEG
+	LDA #01
+	CMP $00B0
+	BEQ OK
+	JMP mainLoop				
+OK
+	CLR $00B0
+	JSR DIS
+	LDA #10
+	INC $00A0
+	CMP $00A0
+	BEQ D_SEG
+	LDA $00A0
+	INC $00B0
+	BRA U_SEG
+	
+
+D_SEG
+	CLR $00A0
+	LDA $00A1
+	JSR DIS
+	LDA #6
+	INC $00A1
+	CMP $00A1
+	BEQ U_MIN
+	LDA $00A1
+	BRA MAIN
+
+	feed_watchdog
+	
+U_MIN 
+	
+	JSR DIS
+	CLR $00A1
+	LDA #10	
+	INC $00A2
+	CMP $00A2
+	BEQ D_MIN
+	LDA $00A2
+	BRA MAIN
+
+D_MIN
+	JSR DIS
+	LDA #6
+ 	INC $00A3
+	CMP $00A3
+	BEQ FIN
+	LDA $00A3
+	BRA MAIN
+
+
+;********************************************************************
+;base de codigo (antes de ampliar a todas las cifras del cronometro)
+
+MAIN	
+	CLR $00A0
+	LDA $00A0
+
+U_SEG
+					;1 MUX
+	JSR SUB_7		;2 DISPLAY
+	JSR delay_1s	;3 RETARDO
+	LDA #10
+	INC $00A0
+	CMP $00A0
+	BEQ D_SEG
+	LDA $00A0
+	BRA U_SEG
+
+D_SEG
+	LDA #6
+	INC $00A1
+	CMP $00A1
+	BEQ U_MIN
+	LDA $00A1
+	BRA MAIN
+
+U_MIN 	INC $00A2
+	BIT $00A2
+	BEQ D_MIN
+	BRA MAIN
+
+D_MIN 	INC $00A3
+	BIT $00A3
+	BEQ FIN
+	BRA MAIN
+
+FIN	BRA $
+;********************************************************************
+;subrutina display
+
+SUB_7
+	CMP #$00
+	BNE NO_0
+	LDA #%10111110
+	STA PTBD			
+	CLRA
+NO_0	CMP #$01
+	BNE NO_1
+	LDA #%00000110
+	STA PTBD
+	CLRA
+NO_1	CMP #$02
+	BNE NO_2
+	LDA #%11011010
+	STA PTBD
+	CLRA
+NO_2	CMP #$03
+	BNE NO_3
+	LDA #%11001110
+	STA PTBD
+	CLRA
+NO_3	CMP #$04
+	BNE NO_4
+	LDA #%01100110
+	STA PTBD
+	CLRA
+NO_4	CMP #$05
+	BNE NO_5
+	LDA #%11101100
+	STA PTBD
+	CLRA
+NO_5	CMP #$06
+	BNE NO_6
+	LDA #%11111100
+	STA PTBD
+	CLRA
+NO_6	CMP #$07
+	BNE NO_7
+	LDA #%10000110
+	STA PTBD
+	CLRA
+NO_7	CMP #$08
+	BNE NO_8
+	LDA #%11111110
+	STA PTBD
+	CLRA
+NO_8	CMP #$09
+	BNE NO_9
+	LDA #%11101110
+	STA PTBD
+	CLRA
+NO_9	
+	RTS
+;********************************************************************
+	
+
+;***************************************************************************************
+;SUBRUTINA: delay_1s    ; demora de 1 segundo (10,000,000 de ciclos de 100 ns)
+
+
+delay_1s			; [5] luego del llamado a JSR 
+		
+		PSHH		; (2)
+		CLRH		; (1)
+		feed_watchdog
+		
+		LDA #$FA	; (2)
+		LDX #$68	; (2)
+loopax01	DBNZX loopax01	
+		DBNZA loopax01	; 771*CTa + 3*CTx - 768
+		LDA #$FA	
+		LDX #$68	
+loopax02	DBNZX loopax02	
+		DBNZA loopax02	
+		LDA #$FA	
+		LDX #$68	
+loopax03	DBNZX loopax03	
+		DBNZA loopax03	
+		LDA #$FA	
+		LDX #$68	
+loopax04	DBNZX loopax04	
+		DBNZA loopax04	
+		LDA #$FA	
+		LDX #$68	
+loopax05	DBNZX loopax05	
+		DBNZA loopax05	
+		LDA #$FA	
+		LDX #$68	
+loopax06	DBNZX loopax06	
+		DBNZA loopax06	
+		LDA #$FA	
+		LDX #$68	
+loopax07	DBNZX loopax07	
+		DBNZA loopax07	
+		LDA #$FA	
+		LDX #$68	
+loopax08	DBNZX loopax08	
+		DBNZA loopax08	
+		LDA #$FA	
+		LDX #$68	
+loopax09	DBNZX loopax09	
+		DBNZA loopax09	
+		LDA #$FA	
+		LDX #$68	
+loopax10	DBNZX loopax10	
+		DBNZA loopax10	
+
+		LDA #$FA	
+		LDX #$68	
+loopax11	DBNZX loopax11	
+		DBNZA loopax11	
+		LDA #$FA	
+		LDX #$68	
+loopax12	DBNZX loopax12	
+		DBNZA loopax12	
+		LDA #$FA	
+		LDX #$68	
+loopax13	DBNZX loopax13	
+		DBNZA loopax13	
+		LDA #$FA	
+		LDX #$68	
+loopax14	DBNZX loopax14	
+		DBNZA loopax14	
+		LDA #$FA	
+		LDX #$68	
+loopax15	DBNZX loopax15	
+		DBNZA loopax15	
+		LDA #$FA	
+		LDX #$68	
+loopax16	DBNZX loopax16	
+		DBNZA loopax16	
+		LDA #$FA	
+		LDX #$68	
+loopax17	DBNZX loopax17	
+		DBNZA loopax17	
+		LDA #$FA	
+		LDX #$68	
+loopax18	DBNZX loopax18	
+		DBNZA loopax18	
+		LDA #$FA	
+		LDX #$68	
+loopax19	DBNZX loopax19	
+		DBNZA loopax19	
+		LDA #$FA	
+		LDX #$68	
+loopax20	DBNZX loopax20	
+		DBNZA loopax20	
+
+		LDA #$FA	
+		LDX #$68	
+loopax21	DBNZX loopax21	
+		DBNZA loopax21	
+		LDA #$FA	
+		LDX #$68	
+loopax22	DBNZX loopax22	
+		DBNZA loopax22	
+		LDA #$FA	
+		LDX #$68	
+loopax23	DBNZX loopax23	
+		DBNZA loopax23	
+		LDA #$FA	
+		LDX #$68	
+loopax24	DBNZX loopax24	
+		DBNZA loopax24	
+		LDA #$FA	
+		LDX #$68	
+loopax25	DBNZX loopax25	
+		DBNZA loopax25	
+		LDA #$FA	
+		LDX #$68	
+		
+		feed_watchdog
+		
+loopax26	DBNZX loopax26	
+		DBNZA loopax26	
+		LDA #$FA	
+		LDX #$68	
+loopax27	DBNZX loopax27	
+		DBNZA loopax27	
+		LDA #$FA	
+		LDX #$68	
+loopax28	DBNZX loopax28	
+		DBNZA loopax28	
+		LDA #$FA	
+		LDX #$68	
+loopax29	DBNZX loopax29	
+		DBNZA loopax29	
+		LDA #$FA	
+		LDX #$68	
+loopax30	DBNZX loopax30	
+		DBNZA loopax30	
+
+		LDA #$FA	
+		LDX #$68	
+loopax31	DBNZX loopax31	
+		DBNZA loopax31	
+		LDA #$FA	
+		LDX #$68	
+loopax32	DBNZX loopax32	
+		DBNZA loopax32	
+		LDA #$FA	
+		LDX #$68	
+loopax33	DBNZX loopax33	
+		DBNZA loopax33	
+		LDA #$FA	
+		LDX #$68	
+loopax34	DBNZX loopax34	
+		DBNZA loopax34	
+		LDA #$FA	
+		LDX #$68	
+loopax35	DBNZX loopax35	
+		DBNZA loopax35	
+		LDA #$FA	
+		LDX #$68	
+loopax36	DBNZX loopax36	
+		DBNZA loopax36	
+		LDA #$FA	
+		LDX #$68	
+loopax37	DBNZX loopax37	
+		DBNZA loopax37	
+		LDA #$FA	
+		LDX #$68	
+loopax38	DBNZX loopax38	
+		DBNZA loopax38	
+		LDA #$FA	
+		LDX #$68	
+loopax39	DBNZX loopax39	
+		DBNZA loopax39	
+		LDA #$FA	
+		LDX #$68	
+loopax40	DBNZX loopax40	
+		DBNZA loopax40	
+
+		LDA #$FA	
+		LDX #$68	
+loopax41	DBNZX loopax41	
+		DBNZA loopax41	
+		LDA #$FA	
+		LDX #$68	
+loopax42	DBNZX loopax42	
+		DBNZA loopax42	
+		LDA #$FA	
+		LDX #$68	
+loopax43	DBNZX loopax43	
+		DBNZA loopax43	
+		LDA #$FA	
+		LDX #$68	
+loopax44	DBNZX loopax44	
+		DBNZA loopax44	
+		LDA #$FA	
+		LDX #$68	
+loopax45	DBNZX loopax45	
+		DBNZA loopax45	
+		LDA #$FA	
+		LDX #$68	
+loopax46	DBNZX loopax46	
+		DBNZA loopax46	
+		LDA #$FA	
+		LDX #$68	
+loopax47	DBNZX loopax47	
+		DBNZA loopax47	
+		LDA #$FA	
+		LDX #$68	
+loopax48	DBNZX loopax48	
+		DBNZA loopax48	
+		LDA #$FA	
+		LDX #$68	
+loopax49	DBNZX loopax49	
+		DBNZA loopax49	
+		LDA #$FA	
+		LDX #$68	
+loopax50	DBNZX loopax50	
+		DBNZA loopax50	
+
+		LDA #$FA	
+		LDX #$68	
+loopax51	DBNZX loopax51	
+		DBNZA loopax51	
+		LDA #$FA	
+		LDX #$68	
+loopax52	DBNZX loopax52	
+		DBNZA loopax52	
+
+		LDA #$E8	; (2)
+		
+loopnop		DBNZA loopnop	; (3*Cloopnop)
+
+		PULH		; (2) recupero el H
+		RTS		; [4]
+

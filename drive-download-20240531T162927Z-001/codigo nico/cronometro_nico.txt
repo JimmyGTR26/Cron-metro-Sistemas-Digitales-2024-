@@ -1,0 +1,76 @@
+-----------------
+;base de codigo (antes de ampliar a todas las cifras del cronometro)
+	LDAA $C3
+
+;definir variables, lugar en memoria, etc.
+
+
+-------------------
+MAIN	CLR $00A0
+
+U_SEG	INC $00A0
+	BITA $00A0
+	BEQ D_SEG
+	BRA U_SEG
+
+D_SEG	INC $00A1
+	BITA $00A1
+	BEQ U_MIN
+	BRA D_SEG
+
+U_MIN 	INC $00A2
+	BITA $00A2
+	BEQ D_MIN
+	BRA U_MIN
+
+D_MIN 	INC $00A3
+	BITA $00A3
+	BEQ FIN
+	BRA D_MIN
+
+FIN	BRA $
+------------------
+SUB_7	CMPA #$00
+	BNE NO_0
+	LDAA #%10111110
+	STAA B			; B HAY QUE DARLE EL VALOR EN MEMORIA QUE PERTENECE ANTES ($0001)
+NO_0	CMPA #$01
+	BNE NO_1
+	LDAA #%00000110
+	STAA B
+NO_1	MPA #$02
+	BNE NO_2
+	LDAA #%11011010
+	STAA B
+NO_2	MPA #$03
+	BNE NO_3
+	LDAA #%11001110
+	STAA B
+NO_3	CMPA #$04
+	BNE NO_4
+	LDAA #%01100110
+	STAA B
+NO_4	CMPA #$05
+	BNE NO_5
+	LDAA #%1101100
+	STAA B
+NO_5	CMPA #$06
+	BNE NO_6
+	LDAA #%11111100
+	STAA B
+NO_6	CMPA #$07
+	BNE NO_7
+	LDAA #%10000110
+	STAA B
+NO_7	CMPA #$08
+	BNE NO_8
+	LDAA #%11111110
+	STAA B
+NO_8	LDAA #%11101110
+	STAA B
+-------------------
+;codigo ampliado
+
+	LDAA $
+
+MAIN	CLR $00A0 ;u/segundos
